@@ -26,7 +26,10 @@ public class Bank {
             scanner.nextLine(); // Cleanup \n
 
             // Early exit
-            if (rootLevelChoice == 3) return;
+            if (rootLevelChoice == 3) { 
+            	System.out.println("Exiting Bank Program...");
+            	return;
+            }
 
             // Create User
             if (rootLevelChoice == 2){
