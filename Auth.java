@@ -13,6 +13,12 @@ public class Auth {
 
     public Auth(){}
 
+    // Returning User Objects
+    ArrayList<User> getAllUsers(){
+        ArrayList<User> userObjectList = new ArrayList<User>(userRecords.values());
+        return userObjectList;
+    }
+
     // Ask for Username Input (On Success Return the String, On Fail Return Null)
     String inputUsername(Scanner scanner){
         String userInput;
@@ -70,30 +76,41 @@ public class Auth {
     }
 
     // Sign In User
+    User signInUser(String username, String password){
+        // Acquire User Object
+        User user = userRecords.get(username);
+        boolean correctPassword;
+
+        // Invalid Username
+        if (user == null){
+            System.out.println("User not found. Please try again.");
+        }
+
+        // Valid Account -> Verify Password
+        else{
+            correctPassword = user.verifyPassword(password);
+            if (!correctPassword){
+                System.out.println("Incorrect Password. Please try again.");
+            }
+
+            // Return user if both are correct
+            else{
+                return user;
+            }
+        }
+
+        return null;
+    }
 
     // Sign Out
     private void signOutUser(){
         currentUser = null;
     }
 
-    // Unique Username Check TODO: Apply for Creating Account
-    private boolean ifUsernameExists(String username){
+    // Unique Username Check
+    boolean ifUsernameExists(String username){
         return userRecords.containsKey(username);
     }
 
-    // Returning User Objects
-    ArrayList<User> getAllUsers(){
-        ArrayList<User> userObjectList = new ArrayList<User>(userRecords.values());
-        return userObjectList;
-    }
 
-    User getUser(String username){
-        User user = userRecords.get(username);
-
-        if (user == null){
-            System.out.println("User not found. Please try again.");
-        }
-
-        return user;
-    }
 }

@@ -31,10 +31,30 @@ public class Bank {
 
             // Create User
             if (rootLevelChoice == 2){
-                // Collect Username and Password, Exit if Null Returned (User Chose to Quit)
-                String username = authClient.inputUsername(scanner);
-                if (username == null ) continue;
+                // Collect Username
+                String username;
 
+                while (true) {
+                    username = authClient.inputUsername(scanner);
+
+                    // Choosing to quit returns null
+                    if (username == null) break;
+
+                    // Check Duplicate Username
+                    if (authClient.ifUsernameExists(username)) {
+                        System.out.println("Username already exists. Please try again.");
+                        continue;
+                    }
+
+                    else{
+                        break;
+                    }
+                }
+
+                // Outer Layer Quit
+                if (username == null) continue;
+
+                // Collect Password
                 String password = authClient.inputPassword(scanner);
                 if (password == null ) continue;
 
@@ -44,20 +64,32 @@ public class Bank {
 
             // Sign In (Core Function)
             if (rootLevelChoice == 1){
-                // Collect Username and Password, Exit if Null Returned (User Chose to Quit)
-                String username = authClient.inputUsername(scanner);
-                if (username == null) continue;
+                User user = null;
 
-                User user = authClient.getUser(username);
-                // No Record Found
-                if (user == null ) continue;
+                while (true){
+                    // Username Check
+                    String username = authClient.inputUsername(scanner);
+                    if (username == null) break;
 
-                // TODO: Succesfully Found User
-                System.out.println("Sign in Succesfully");
+                    // Collect Password
+                    String password = authClient.inputPassword(scanner);
+                    if (password == null ) break;
+
+                    // Returns Null if Invalid, Object if Valid
+                    user = authClient.signInUser(username, password);
+
+                    // Exit Loop Once Received Proper User Object
+                    if (user!=null) break;
+                }
+
+                // Inner Loop Exited Early from Username or Password
+                if (user == null ) break;
+
+                System.out.println("Sign in Succesfully to account " + user);
+
+                // TODO: Continue Here after Succesful Sign In
 
                 }
             }
-
-
         }
     }

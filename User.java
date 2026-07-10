@@ -22,18 +22,13 @@ public class User {
         this.passwordHash = password.hashCode();
     }
 
-    // Check if Hash Matches
-    boolean verifyPassword(String password) {
-        return password.hashCode() == passwordHash;
-    }
-
     // Username Getter
     String getUsername(){
         return username;
     }
 
     // Account Getter and Adder (No Setter Since ArrayList is Mutable)
-    ArrayList<BankAccount> getAccounts(){
+    ArrayList<BankAccount> getBankAccounts(){
         // Return A Copy (Not Original Reference)
         return new ArrayList<BankAccount>(accounts);
     }
@@ -42,6 +37,12 @@ public class User {
     void addAccount(BankAccount newAccount){
         accounts.add(newAccount);
     }
+
+    // Check if Hash Matches
+    boolean verifyPassword(String password) {
+        return password.hashCode() == passwordHash;
+    }
+
 
     public String toString(){
         return String.format("Username: %s , Password Hash: %s", username, passwordHash);
