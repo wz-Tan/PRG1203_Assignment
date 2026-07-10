@@ -27,7 +27,7 @@ public class Bank {
 
             // Early exit
             if (rootLevelChoice == 3) { 
-            	System.out.println("Exiting Bank Program...");
+            	System.out.println("...Exiting Bank Program...");
             	return;
             }
 
