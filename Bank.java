@@ -1,6 +1,5 @@
 package BankSystem;
 
-import java.util.Arrays;
 import java.util.Scanner;
 
 // This Serves as the Main Loop / Program
@@ -83,7 +82,7 @@ public class Bank {
                 }
 
                 // Inner Loop Exited Early from Username or Password
-                if (user == null ) break;
+                if (user == null ) continue;
 
                 System.out.println("Sign in Succesfully to account " + user);
 

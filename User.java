@@ -49,4 +49,3 @@ public class User {
     }
 }
 
-// Notes: Removed setAccounts, Added getUsername, Added toString

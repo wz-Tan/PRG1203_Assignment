@@ -9,7 +9,6 @@ import java.util.Scanner;
 public class Auth {
     // Map userName to userObject
     private HashMap<String,User> userRecords = new HashMap<String,User>();
-    private User currentUser;
 
     public Auth(){}
 
@@ -100,11 +99,6 @@ public class Auth {
         }
 
         return null;
-    }
-
-    // Sign Out
-    private void signOutUser(){
-        currentUser = null;
     }
 
     // Unique Username Check
