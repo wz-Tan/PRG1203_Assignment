@@ -87,9 +87,16 @@ public class Bank {
                 // Inner Loop Exited Early from Username or Password
                 if (user == null ) continue;
 
-                System.out.println("Sign in Succesfully to account " + user);
+                System.out.println("Signed in Succesfully!");
+                
+                int userChoice = 0;
+                
 
-                // TODO: Continue Here after Succesful Sign In
+                // Second Loop -> Actions On Sign In
+                while (userChoice!=5) {
+                	System.out.printf("\nDear user %s, what would you like to do today? \n\n",user.getUsername());
+                	System.out.println("1. Action 1");
+                }
 
                 }
             }
