@@ -1,6 +1,7 @@
 package BankSystem;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 import java.util.UUID;
 import java.time.LocalDate;
 
@@ -60,6 +61,23 @@ public class User {
     	}
     }
 
+    void accountEnquiry() {
+    	// Return back if no accounts available
+    	if (accounts.size() == 0) {
+    		System.out.println("No accounts available.");
+    		return;
+    	}
+    	
+    	// Prints available accounts
+    	Scanner userInput = new Scanner(System.in);
+    	System.out.println("Which account would you like to enquire: ");
+    	for (BankAccount a : accounts) {
+    		int i = 1;
+    		System.out.printf("%d. %s\n", i, a.getAccountNumber());
+    		i++;
+    	}
+    	int choice = userInput.nextInt();
+    }
 
     public String toString(){
         return String.format("Username: %s , Password Hash: %s", username, passwordHash);
