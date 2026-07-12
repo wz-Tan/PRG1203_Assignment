@@ -110,6 +110,8 @@ public class Bank {
                 		break; 
                 	case 4: 
                 		// Advance One Month
+                		System.out.println("Advancing Time By One Month Forward...");
+                		user.advanceMonth();
                 		break; 
                 	case 5: 
                 		// Account Enquiry

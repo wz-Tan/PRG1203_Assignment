@@ -2,12 +2,14 @@ package BankSystem;
 
 import java.util.ArrayList;
 import java.util.UUID;
+import java.time.LocalDate;
 
 public class User {
 
     private String userId;
     private String username;
     private int passwordHash; // Compare hashed result
+    private LocalDate currentDate; // Current Date for User -> Used to log transactions and keep their timing separate
     private ArrayList<BankAccount> accounts = new ArrayList<>(); // ArrayList of User's Bank Accounts
 
     public User() {}
@@ -20,6 +22,7 @@ public class User {
         // Assign Params as Fields
         this.username = username;
         this.passwordHash = password.hashCode();
+        this.currentDate = LocalDate.now(); 
     }
 
     // Username Getter
@@ -32,6 +35,11 @@ public class User {
         // Return A Copy (Not Original Reference)
         return new ArrayList<BankAccount>(accounts);
     }
+    
+    // Get Date for Transactions 
+    LocalDate getCurrentDate() {
+    	return currentDate;
+    }
 
     // Adding New Account
     void addAccount(BankAccount newAccount){
@@ -41,6 +49,15 @@ public class User {
     // Check if Hash Matches
     boolean verifyPassword(String password) {
         return password.hashCode() == passwordHash;
+    }
+    
+    // Logic to Advance Month (Calculates Interest and Updates currentDate
+    void advanceMonth() {
+    	currentDate = currentDate.plusMonths(1);
+    	
+    	for (BankAccount account: accounts) {
+    		account.calculateInterest();
+    	}
     }
 
 
