@@ -27,7 +27,7 @@ public class Bank {
 
             // Early exit
             if (rootLevelChoice == 3) { 
-            	System.out.println("...Exiting Bank Program...");
+            	System.out.println("--- Exiting Bank Program ---");
             	return;
             }
 
@@ -91,12 +91,42 @@ public class Bank {
                 
                 int userChoice = 0;
                 
-
                 // Second Loop -> Actions On Sign In
-                while (userChoice!=5) {
+                while (userChoice!=6) {
                 	System.out.printf("\nDear user %s, what would you like to do today? \n\n",user.getUsername());
-                	System.out.println("1. Action 1");
+                	System.out.println("1. Create Savings Account \n2. Create Loan Repayment Account \n3. Perform Transaction \n4. Advance One Month \n5. Account Enquiry  \n6. Sign Out");
+                	
+                	userChoice = scanner.nextInt();
+                	
+                	switch (userChoice) {
+                	case 1:
+                		// Create Savings Account
+                		break; 
+                	case 2:
+                		// Create Loan Repayment Account
+                		break; 
+                	case 3: 
+                		// Perform Transaction
+                		break; 
+                	case 4: 
+                		// Advance One Month
+                		break; 
+                	case 5: 
+                		// Account Enquiry
+                		break; 
+                	case 6:
+                		// Sign Out Message
+                		System.out.printf("---Signing you out, user %s---\n", user.getUsername());
+                		break; 
+                	default:
+                        System.out.println("Invalid choice, please try again.");
+                        break;
+                	}             		
+                	
                 }
+                
+                // Back to Auth Loop
+
 
                 }
             }
