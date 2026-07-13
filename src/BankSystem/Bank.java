@@ -114,7 +114,7 @@ public class Bank {
                 		user.advanceMonth();
                 		break; 
                 	case 5: 
-                		// Account Enquiry
+                		user.accountEnquiry();
                 		break; 
                 	case 6:
                 		// Sign Out Message
