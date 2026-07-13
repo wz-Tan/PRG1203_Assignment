@@ -10,8 +10,11 @@ public class User {
     private String userId;
     private String username;
     private int passwordHash; // Compare hashed result
-    private LocalDate currentDate; // Current Date for User -> Used to log transactions and keep their timing separate
     private ArrayList<BankAccount> accounts = new ArrayList<>(); // ArrayList of User's Bank Accounts
+    
+    private LocalDate currentDate; // Current Date for User -> Used to log transactions and keep their timing separate
+    private int monthsPassed; 
+    
 
     public User() {}
 
@@ -24,6 +27,7 @@ public class User {
         this.username = username;
         this.passwordHash = password.hashCode();
         this.currentDate = LocalDate.now(); 
+        this.monthsPassed = 0;
     }
 
     // Username Getter
@@ -39,7 +43,7 @@ public class User {
     
     // Get Date for Transactions 
     LocalDate getCurrentDate() {
-    	return currentDate;
+    	return currentDate.plusMonths(monthsPassed);
     }
 
     // Adding New Account
@@ -54,10 +58,10 @@ public class User {
     
     // Logic to Advance Month (Calculates Interest and Updates currentDate
     void advanceMonth() {
-    	currentDate = currentDate.plusMonths(1);
+    	monthsPassed ++; 
     	
     	for (BankAccount account: accounts) {
-    		account.calculateInterest();
+    		account.calculateInterest(getCurrentDate());
     	}
     }
 

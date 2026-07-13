@@ -2,7 +2,7 @@ package BankSystem;
 
 import java.util.Scanner;
 
-// This Serves as the Main Loop / Program
+// This Serves as the Controller
 public class Bank {
     private Auth authClient = new Auth();
 

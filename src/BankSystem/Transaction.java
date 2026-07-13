@@ -4,7 +4,7 @@ import java.time.LocalDate;
 
 public class Transaction {
 	//enumerator
-	public enum TransactionType { Deposit, Withdrawal };
+	public enum TransactionType { Deposit, Withdrawal, Interest };
 
 	//variables
 	private TransactionType type;

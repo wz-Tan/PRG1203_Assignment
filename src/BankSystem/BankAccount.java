@@ -48,15 +48,15 @@ public abstract class BankAccount{
 
 	// Deposit Without a Note
 	boolean deposit(double amount,  LocalDate timestamp){
-		return deposit(amount, null);
+		return deposit(amount, null, timestamp);
 	}
 
 	// Withdraw Funds (Abstract)
-	abstract boolean withdraw(double amount, String note);
+	abstract boolean withdraw(double amount, String note,  LocalDate timestamp);
 
 	// Withdraw Without a Note (Abstract)
-	boolean withdraw(double amount){
-		return withdraw(amount, null);
+	boolean withdraw(double amount,  LocalDate timestamp){
+		return withdraw(amount, null, timestamp);
 	}
 
 	// Calculate and Apply Monthly Interest to the Balance
