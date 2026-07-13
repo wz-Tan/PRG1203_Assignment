@@ -1,6 +1,7 @@
 package BankSystem;
 
 import java.util.ArrayList;
+import java.time.LocalDate;
 import java.util.UUID;
 
 // Abstract Parent Class of SavingsAccount and LoanRepaymentAccount
@@ -33,7 +34,7 @@ public abstract class BankAccount{
 	}
 
 	// Deposit Funds 
-	boolean deposit(double amount, String note){
+	boolean deposit(double amount, String note, LocalDate timestamp){
 		// Reject Non-Positive Amounts
 		if (amount <= 0){
 			System.out.println("Deposit amount must be greater than zero.");
@@ -41,12 +42,12 @@ public abstract class BankAccount{
 		}
 
 		balance += amount;
-		transactions.add(new Transaction(Transaction.TransactionType.Deposit, amount, note));
+		transactions.add(new Transaction(Transaction.TransactionType.Deposit, amount, note, timestamp));
 		return true;
 	}
 
 	// Deposit Without a Note
-	boolean deposit(double amount){
+	boolean deposit(double amount,  LocalDate timestamp){
 		return deposit(amount, null);
 	}
 
@@ -59,12 +60,12 @@ public abstract class BankAccount{
 	}
 
 	// Calculate and Apply Monthly Interest to the Balance
-	void calculateInterest(){
+	void calculateInterest(LocalDate timestamp){
 		double interest;
 		
 		interest = balance * interestRate;
 		balance += interest;
-		transactions.add(new Transaction(Transaction.TransactionType.Deposit, interest, "Monthly Interest"));
+		transactions.add(new Transaction(Transaction.TransactionType.Deposit, interest, "Monthly Interest", timestamp));
 		System.out.printf("Interest of %.2f applied to account %s. New balance: %.2f%n", interest, accountNumber, balance);
 	}
 	
