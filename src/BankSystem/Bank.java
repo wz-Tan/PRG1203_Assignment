@@ -97,10 +97,13 @@ public class Bank {
                 	System.out.println("1. Create Savings Account \n2. Create Loan Repayment Account \n3. Perform Transaction \n4. Advance One Month \n5. Account Enquiry  \n6. Sign Out");
                 	
                 	userChoice = scanner.nextInt();
+                	scanner.nextLine();
+                	
                 	
                 	switch (userChoice) {
                 	case 1:
                 		// Create Savings Account
+                		openSavingsAccount(scanner);
                 		break; 
                 	case 2:
                 		// Create Loan Repayment Account
@@ -133,5 +136,13 @@ public class Bank {
                 }
             }
         }
+    
+    private SavingsAccount openSavingsAccount(Scanner scanner) {
+    	System.out.println("To open a savings account, you need to have at least RM100. How much money would you like to put in?");
+    	double initialDeposit = scanner.nextDouble();
+    	scanner.nextLine();
+    	return new SavingsAccount();
+    	
+    }
    
     }
