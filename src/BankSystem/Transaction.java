@@ -1,5 +1,5 @@
 package BankSystem;
 
 public class Transaction {
-	public Transaction() {
+	public Transaction() {}
 }
