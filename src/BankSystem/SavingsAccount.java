@@ -1,8 +1,10 @@
 package BankSystem;
 
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.UUID;
 import java.time.LocalDate;
 
-<<<<<<< HEAD
 public class SavingsAccount extends BankAccount{
 	
 	//declare min balance as rm100 using final and double due to decimal places in money
@@ -51,15 +53,3 @@ public class SavingsAccount extends BankAccount{
 		}
 
 	}
-=======
-public class SavingsAccount extends BankAccount {
-	
-
-	@Override
-	boolean withdraw(double amount, String note, LocalDate timestamp) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-	
-}
->>>>>>> a805c22dde13a191513c0c141b7c207f84cdb62a
