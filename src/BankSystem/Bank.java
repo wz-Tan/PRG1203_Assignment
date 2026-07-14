@@ -112,9 +112,21 @@ public class Bank {
                 		break; 
                 	case 2:
                 		// Create Loan Repayment Account
+                		
+                		// Ask user for loan to be repaid 
+                		
+                		// Make account and give to user
                 		break; 
                 	case 3: 
                 		// Perform Transaction
+                		System.out.println("Please select an account to perform your transaction.");
+                		
+                		// Map Out User Accounts 
+                		
+                		// Choose An Account 
+                		
+                		// Perform Deposit or Withdrawal
+                		
                 		break; 
                 	case 4: 
                 		// Advance One Month
