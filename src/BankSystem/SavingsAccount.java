@@ -42,12 +42,7 @@ public class SavingsAccount extends BankAccount{
 			balance -= amount;
 		
 		//record the transaction performed
-			transactions.add(new Transaction (
-				Transaction.TransactionType.Withdrawal,
-				amount,
-				note,
-				timestamp)
-				);
+			transactions.add(new Transaction(Transaction.TransactionType.Withdrawal, amount, note, timestamp));
 			
 		return true;
 		}

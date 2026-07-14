@@ -80,7 +80,8 @@ public class User {
     		System.out.printf("%d. %s\n", i, a.getAccountNumber());
     		i++;
     	}
-    	int choice = userInput.nextInt();
+    	int choice = userInput.nextInt() - 1;
+    	accounts.get(choice).getAccountInfo();
     }
 
     public String toString(){

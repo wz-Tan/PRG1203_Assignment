@@ -106,6 +106,8 @@ public class Bank {
                 		SavingsAccount newSavingsAccount = openSavingsAccount(scanner);
                 		if (newSavingsAccount != null) {
                 			// Add the savings account to the user if its a valid amount
+                			user.addAccount(newSavingsAccount);
+                			System.out.println("Savings account created successfully.");
                 		}
                 		break; 
                 	case 2:
@@ -154,7 +156,7 @@ public class Bank {
     		System.out.println("Sorry, something went wrong.");
     		scanner.nextLine();
     		return null; 
-    	}
+    		}
     		
     	}
    
