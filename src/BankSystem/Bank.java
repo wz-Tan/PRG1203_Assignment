@@ -103,7 +103,10 @@ public class Bank {
                 	switch (userChoice) {
                 	case 1:
                 		// Create Savings Account
-                		openSavingsAccount(scanner);
+                		SavingsAccount newSavingsAccount = openSavingsAccount(scanner);
+                		if (newSavingsAccount != null) {
+                			// Add the savings account to the user if its a valid amount
+                		}
                 		break; 
                 	case 2:
                 		// Create Loan Repayment Account
@@ -137,12 +140,22 @@ public class Bank {
             }
         }
     
+    // Ignore For Now
     private SavingsAccount openSavingsAccount(Scanner scanner) {
     	System.out.println("To open a savings account, you need to have at least RM100. How much money would you like to put in?");
-    	double initialDeposit = scanner.nextDouble();
-    	scanner.nextLine();
-    	return new SavingsAccount();
-    	
-    }
+    	try {	
+    	    double initialDeposit = scanner.nextDouble();
+    	    scanner.nextLine();
+    	    
+    	    // Check if it's enough
+    	    return new SavingsAccount();
+    	}
+    	catch(Exception e) {
+    		System.out.println("Sorry, something went wrong.");
+    		scanner.nextLine();
+    		return null; 
+    	}
+    		
+    	}
    
     }
