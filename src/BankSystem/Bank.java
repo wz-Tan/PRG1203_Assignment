@@ -1,5 +1,6 @@
 package BankSystem;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 // This Serves as the Controller
@@ -103,12 +104,10 @@ public class Bank {
                 	switch (userChoice) {
                 	case 1:
                 		// Create Savings Account
-                		SavingsAccount newSavingsAccount = openSavingsAccount(scanner);
-                		if (newSavingsAccount != null) {
-                			// Add the savings account to the user if its a valid amount
-                			user.addAccount(newSavingsAccount);
-                			System.out.println("Savings account created successfully.");
-                		}
+                		SavingsAccount sa = createSavingsAccount(scanner);
+                		// Add account to arrayList of users account
+                		if (sa != null)
+                			user.addAccount(sa);
                 		break; 
                 	case 2:
                 		// Create Loan Repayment Account
@@ -154,22 +153,28 @@ public class Bank {
             }
         }
     
-    // Ignore For Now
-    private SavingsAccount openSavingsAccount(Scanner scanner) {
+    private SavingsAccount createSavingsAccount(Scanner scanner) {
     	System.out.println("To open a savings account, you need to have at least RM100. How much money would you like to put in?");
     	try {	
     	    double initialDeposit = scanner.nextDouble();
     	    scanner.nextLine();
     	    
-    	    // Check if it's enough
-    	    return new SavingsAccount();
+    		if (initialDeposit < 100)
+    			throw new IllegalArgumentException("Error: amount must be more than RM100");
+    		
+    	    SavingsAccount sa = new SavingsAccount(initialDeposit);
+    	    System.out.println("Savings account created successfully");
+    	    return sa;
     	}
-    	catch(Exception e) {
-    		System.out.println("Sorry, something went wrong.");
+    	catch(InputMismatchException e) {
+    		System.out.println("Error: please input a number.");
     		scanner.nextLine();
     		return null; 
-    		}
-    		
     	}
-   
+    	catch(IllegalArgumentException e) {
+    		System.out.println(e.getMessage());
+    		return null;
+    	}
+    		
     }
+}
