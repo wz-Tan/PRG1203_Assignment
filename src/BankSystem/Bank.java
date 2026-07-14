@@ -103,6 +103,7 @@ public class Bank {
                 	switch (userChoice) {
                 	case 1:
                 		// Create Savings Account
+                		
                 		SavingsAccount newSavingsAccount = openSavingsAccount(scanner);
                 		if (newSavingsAccount != null) {
                 			// Add the savings account to the user if its a valid amount
