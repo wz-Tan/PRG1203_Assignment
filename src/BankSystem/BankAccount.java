@@ -18,24 +18,24 @@ public abstract class BankAccount{
 		this.transactions = new ArrayList<Transaction>();
 	}
 
-	// Account Number Getter
+	// Account number getter
 	String getAccountNumber(){
 		return accountNumber;
 	}
 
-	// Balance Getter
+	// Balance getter
 	double getBalance(){
 		return balance;
 	}
 
-	// Transactions Getter 
+	// Transactions getter 
 	ArrayList<Transaction> getTransactions(){
 		return new ArrayList<Transaction>(transactions);
 	}
 
-	// Deposit Funds 
+	// Deposit funds 
 	boolean deposit(double amount, String note, LocalDate timestamp){
-		// Reject Non-Positive Amounts
+		// Reject non-positive amounts
 		if (amount <= 0){
 			System.out.println("Deposit amount must be greater than zero.");
 			return false;
@@ -46,15 +46,15 @@ public abstract class BankAccount{
 		return true;
 	}
 
-	// Deposit Without a Note
+	// Deposit without a note
 	boolean deposit(double amount,  LocalDate timestamp){
 		return deposit(amount, null, timestamp);
 	}
 
-	// Withdraw Funds (Abstract)
+	// Withdraw funds (abstract)
 	abstract boolean withdraw(double amount, String note,  LocalDate timestamp);
 
-	// Withdraw Without a Note (Abstract)
+	// Withdraw without a note (abstract)
 	boolean withdraw(double amount,  LocalDate timestamp){
 		return withdraw(amount, null, timestamp);
 	}

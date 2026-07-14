@@ -16,6 +16,10 @@ public class SavingsAccount extends BankAccount{
 		
 	}
 	
+	public SavingsAccount(double initialAmount) {
+		balance = initialAmount;
+	}
+	
 	//double check if the balance inside savings account is enough
 	boolean verifyMinBalance(double amount) {
 		return ( balance - amount ) >= minBalance;

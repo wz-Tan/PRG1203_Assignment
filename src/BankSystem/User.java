@@ -74,9 +74,9 @@ public class User {
     	
     	// Prints available accounts
     	Scanner userInput = new Scanner(System.in);
+		int i = 1;
     	System.out.println("Which account would you like to enquire: ");
     	for (BankAccount a : accounts) {
-    		int i = 1;
     		System.out.printf("%d. %s\n", i, a.getAccountNumber());
     		i++;
     	}
