@@ -65,7 +65,7 @@ public abstract class BankAccount{
 		
 		interest = balance * interestRate;
 		balance += interest;
-		transactions.add(new Transaction(Transaction.TransactionType.Deposit, interest, "Monthly Interest", timestamp));
+		transactions.add(new Transaction(Transaction.TransactionType.Interest, interest, "Monthly Interest", timestamp));
 		System.out.printf("Interest of %.2f applied to account %s. New balance: %.2f%n", interest, accountNumber, balance);
 	}
 	
