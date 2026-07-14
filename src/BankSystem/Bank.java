@@ -104,8 +104,7 @@ public class Bank {
                 	switch (userChoice) {
                 	case 1:
                 		// Create Savings Account
-
-                    		SavingsAccount sa = createSavingsAccount(scanner);
+                    	SavingsAccount sa = createSavingsAccount(scanner);
                 		// Add account to arrayList of users account
                 		if (sa != null)
                 			user.addAccount(sa);
@@ -134,7 +133,7 @@ public class Bank {
                 		user.advanceMonth();
                 		break; 
                 	case 5: 
-                		user.accountEnquiry();
+                		user.accountEnquiry(scanner);
                 		break; 
                 	case 6:
                 		// Sign Out Message
@@ -167,6 +166,7 @@ public class Bank {
     	    System.out.println("Savings account created successfully");
     	    return sa;
     	}
+    	
     	catch(InputMismatchException e) {
     		System.out.println("Error: please input a number.");
     		scanner.nextLine();

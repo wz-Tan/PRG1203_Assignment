@@ -65,11 +65,16 @@ public class User {
     	}
     }
 
-    void accountEnquiry() {
+    void accountEnquiry(Scanner scanner) {
+    	BankAccount chosenAccount = chooseAccount(scanner);
+    }
+    
+    // Select an Account from All Accounts
+    BankAccount chooseAccount(Scanner scanner) {
     	// Return back if no accounts available
     	if (accounts.size() == 0) {
     		System.out.println("No accounts available.");
-    		return;
+    		return null;
     	}
     	
     	// Prints available accounts
@@ -81,6 +86,7 @@ public class User {
     		i++;
     	}
     	int choice = userInput.nextInt();
+    	return accounts.get(choice-1);
     }
 
     public String toString(){
