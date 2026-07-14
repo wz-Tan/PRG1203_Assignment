@@ -23,8 +23,16 @@ public class Bank {
             System.out.println("Users are " + authClient.getAllUsers());
 
             System.out.println("\nPlease Choose An Action: \n 1 - Sign In \n 2 - Create New User \n 3 - Exit");
-            rootLevelChoice = scanner.nextInt();
-            scanner.nextLine(); // Cleanup \n
+            
+            try {
+	            rootLevelChoice = scanner.nextInt();
+	            scanner.nextLine(); // Cleanup \n
+            }
+            
+            // Non-Integer Input
+            catch(InputMismatchException e) {
+            	scanner.nextLine(); // Cleanup \n
+            }
 
             // Early exit
             if (rootLevelChoice == 3) { 
@@ -33,7 +41,7 @@ public class Bank {
             }
 
             // Create User
-            if (rootLevelChoice == 2){
+            else if (rootLevelChoice == 2){
                 // Collect Username
                 String username;
 
@@ -66,7 +74,7 @@ public class Bank {
             }
 
             // Sign In (Core Function)
-            if (rootLevelChoice == 1){
+            else if (rootLevelChoice == 1){
                 User user = null;
 
                 while (true){
@@ -120,11 +128,16 @@ public class Bank {
                 		// Perform Transaction
                 		System.out.println("Please select an account to perform your transaction.");
                 		
-                		// Map Out User Accounts 
+                		// Select User Account
+                		BankAccount account = user.chooseAccount(scanner);
                 		
-                		// Choose An Account 
+                		// Valid Account
+                		if (account !=null) {
+                			account.getAccountInfo();
+                			// Perform Deposit or Withdrawal
+                		}
                 		
-                		// Perform Deposit or Withdrawal
+                		
                 		
                 		break; 
                 	case 4: 
@@ -150,6 +163,11 @@ public class Bank {
 
 
                 }
+            
+	            // Non-Choice Number Input
+	            else {
+	            	System.out.println("Please select a valid input.");
+	            }
             }
         }
     

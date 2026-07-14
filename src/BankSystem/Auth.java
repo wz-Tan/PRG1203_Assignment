@@ -24,22 +24,29 @@ public class Auth {
 
         while (true){
              System.out.println("Please insert your username. Or, press q to exit. ");
-             userInput = scanner.nextLine().strip();
+             try {
+            	 userInput = scanner.nextLine().strip();
 
-             // Early Exit
-             if (userInput.equals("q") || userInput.equals("Q")){
-                 return null;
-             }
+                 // Early Exit
+                 if (userInput.equals("q") || userInput.equals("Q")){
+                     return null;
+                 }
 
-             // Empty Input
-             else if (userInput.equals("")){
-                 System.out.println("Username cannot be empty!");
-             }
+                 // Empty Input
+                 else if (userInput.equals("")){
+                     System.out.println("Username cannot be empty!");
+                 }
 
-             // Valid Username
-             else{
-                return userInput;
+                 // Valid Username
+                 else{
+                    return userInput;
+                 }
              }
+             catch (Exception e) {
+            	 System.out.println("Invalid input. Please try again");
+            	 return null; 
+             }
+             
         }
     }
 
@@ -48,22 +55,29 @@ public class Auth {
         String userInput;
 
         while (true){
-             System.out.println("Please insert your password. Or, press q to exit. ");
-             userInput = scanner.nextLine().strip();
-
-             // Early Exit
-             if (userInput.equals("q") || userInput.equals("Q")){
-                 return null;
-             }
-
-             // Empty Input
-             else if (userInput.equals("")){
-                 System.out.println("Password cannot be empty!");
-             }
-
-             // Valid Password
-             else{
-                return userInput;
+        	try {
+	             System.out.println("Please insert your password. Or, press q to exit. ");
+	             userInput = scanner.nextLine().strip();
+	
+	             // Early Exit
+	             if (userInput.equals("q") || userInput.equals("Q")){
+	                 return null;
+	             }
+	
+	             // Empty Input
+	             else if (userInput.equals("")){
+	                 System.out.println("Password cannot be empty!");
+	             }
+	
+	             // Valid Password
+	             else{
+	                return userInput;
+	             }
+        	}
+             
+             catch (Exception e) {
+            	 System.out.println("Invalid input. Please try again");
+            	 return null; 
              }
         }
     }
