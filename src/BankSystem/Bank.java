@@ -170,12 +170,12 @@ public class Bank {
     	catch(InputMismatchException e) {
     		System.out.println("Error: please input a number.");
     		scanner.nextLine();
-    		return null; 
     	}
     	catch(IllegalArgumentException e) {
     		System.out.println(e.getMessage());
-    		return null;
     	}
+    	
+    	return null; 
     		
     }
 }

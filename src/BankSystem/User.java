@@ -1,6 +1,7 @@
 package BankSystem;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.UUID;
 import java.time.LocalDate;
@@ -67,6 +68,7 @@ public class User {
 
     void accountEnquiry(Scanner scanner) {
     	BankAccount chosenAccount = chooseAccount(scanner);
+    	System.out.println("Chosen account is " + chosenAccount);
     }
     
     // Select an Account from All Accounts
@@ -78,15 +80,34 @@ public class User {
     	}
     	
     	// Prints available accounts
-    	Scanner userInput = new Scanner(System.in);
 		int i = 1;
     	System.out.println("Which account would you like to enquire: ");
     	for (BankAccount a : accounts) {
     		System.out.printf("%d. %s\n", i, a.getAccountNumber());
     		i++;
     	}
-    	int choice = userInput.nextInt();
-    	return accounts.get(choice-1);
+    	
+    	try {
+    		int choice = scanner.nextInt();
+        	return accounts.get(choice-1);
+    	}
+    	
+    	catch(InputMismatchException e) {
+    		System.out.println("Error: please input a number.");
+    		scanner.nextLine();
+    	}
+    	
+    	catch(IllegalArgumentException e) {
+    		System.out.println(e.getMessage());
+    	}
+    	
+    	catch(Exception e) {
+    		System.out.println("Account does not exist.");
+    	}
+    	
+    	return null;
+    	
+    	
     }
 
     public String toString(){
