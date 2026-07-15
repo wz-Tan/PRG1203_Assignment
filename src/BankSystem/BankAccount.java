@@ -4,12 +4,16 @@ import java.util.ArrayList;
 import java.time.LocalDate;
 import java.util.UUID;
 
+import BankSystem.Transaction.TransactionType;
+
 // Abstract Parent Class of SavingsAccount and LoanRepaymentAccount
 public abstract class BankAccount{
-	private String accountNumber;
+	protected enum AccountType { Savings, LoanRepayment };
+	protected String accountNumber;
 	protected double balance;
 	protected final double interestRate = 0.01;
 	protected ArrayList<Transaction> transactions;
+	protected AccountType type;
 
 	// Constructor
 	public BankAccount(){
@@ -69,12 +73,5 @@ public abstract class BankAccount{
 		System.out.printf("Interest of %.2f applied to account %s. New balance: %.2f%n", interest, accountNumber, balance);
 	}
 	
-	void getAccountInfo() {
-		System.out.printf("Account Number: %s\n", accountNumber);
-		System.out.printf("Balance       : %.2f\n", balance);
-		System.out.printf("Transactions: \n");
-		for (Transaction t : transactions) {
-			System.out.printf("%s\n", t.toString());
-		}
-	}
+	abstract void printAccountInfo();
 }
