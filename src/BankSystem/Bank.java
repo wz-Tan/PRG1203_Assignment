@@ -119,10 +119,23 @@ public class Bank {
                 		break; 
                 	case 2:
                 		// Create Loan Repayment Account
-                		
+                		LoanRepaymentAccount LRA = createLoanRepaymentAccount();
                 		// Ask user for loan to be repaid 
-                		
+                		try {
+                		System.out.println("Amount of loan you have: RM ");
+                		double OutStandingLoan = scanner.nextDouble();
+                		scanner.nextLine();
+                		System.out.printf("RM %.2f of loan left", OutStandingLoan);
+                		}
+                		catch(InputMismatchException e) {
+                    		System.out.println("Error: please input a number.");
+                    		scanner.nextLine();
+                    	}
+                    	catch(IllegalArgumentException e) {
+                    		System.out.println(e.getMessage());}
                 		// Make account and give to user
+                		if (LRA != null)
+                			user.addAccount(LRA);
                 		break; 
                 	case 3: 
                 		// Perform Transaction
@@ -195,5 +208,12 @@ public class Bank {
     	
     	return null; 
     		
+    }
+    
+    private LoanRepaymentAccount createLoanRepaymentAccount() {
+    	double repaidloan = 0;
+    	LoanRepaymentAccount LRA = new LoanRepaymentAccount(repaidloan);
+    	System.out.printf("Loan Repayment Account created. Loan paid: RM %.2f%n", repaidloan);
+    	return LRA;
     }
 }

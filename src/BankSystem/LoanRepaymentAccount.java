@@ -3,7 +3,14 @@ package BankSystem;
 import java.time.LocalDate;
 
 public class LoanRepaymentAccount extends BankAccount{
+	
+	public LoanRepaymentAccount() {
+		
+	}
 
+	public LoanRepaymentAccount(double repaidloan) {
+		balance = repaidloan;
+	}
 
 	@Override
 	boolean withdraw(double amount, LocalDate timestamp){
