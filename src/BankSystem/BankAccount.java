@@ -11,7 +11,7 @@ public abstract class BankAccount{
 	protected enum AccountType { Savings, LoanRepayment };
 	protected String accountNumber;
 	protected double balance;
-	protected final double interestRate = 0.01;
+	protected static final double INTEREST_RATE = 0.01;
 	protected ArrayList<Transaction> transactions;
 	protected AccountType type;
 
@@ -67,11 +67,11 @@ public abstract class BankAccount{
 	void calculateInterest(LocalDate timestamp){
 		double interest;
 		
-		interest = balance * interestRate;
+		interest = balance * INTEREST_RATE;
 		balance += interest;
 		transactions.add(new Transaction(Transaction.TransactionType.Interest, interest, "Monthly Interest", timestamp));
 		System.out.printf("Interest of %.2f applied to account %s. New balance: %.2f%n", interest, accountNumber, balance);
 	}
-	
+
 	abstract void printAccountInfo();
 }
