@@ -18,6 +18,7 @@ public class SavingsAccount extends BankAccount{
 	
 	public SavingsAccount(double initialAmount) {
 		balance = initialAmount;
+		type = AccountType.Savings;
 	}
 	
 	//double check if the balance inside savings account is enough
@@ -48,7 +49,17 @@ public class SavingsAccount extends BankAccount{
 		//record the transaction performed
 			transactions.add(new Transaction(Transaction.TransactionType.Withdrawal, amount, note, timestamp));
 			
-		return true;
-		}
-
+			return true;
 	}
+	
+	@Override
+	void printAccountInfo() {
+		System.out.printf("Account Number: %s\n", accountNumber);
+		System.out.printf("Account Type: %s\n", type);
+		System.out.printf("Balance       : %.2f\n", balance);
+		System.out.printf("Transactions: \n");
+		for (Transaction t : transactions) {
+			System.out.printf("%s\n", t.toString());
+		}
+	}
+}
