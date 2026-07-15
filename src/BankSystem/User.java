@@ -69,6 +69,7 @@ public class User {
     void accountEnquiry(Scanner scanner) {
     	BankAccount chosenAccount = chooseAccount(scanner);
     	System.out.println("Chosen account is " + chosenAccount);
+    	chosenAccount.printAccountInfo();
     }
     
     // Select an Account from All Accounts
@@ -106,8 +107,6 @@ public class User {
     	}
     	
     	return null;
-    	
-    	
     }
 
     public String toString(){
