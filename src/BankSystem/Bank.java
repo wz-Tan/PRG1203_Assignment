@@ -119,23 +119,10 @@ public class Bank {
                 		break; 
                 	case 2:
                 		// Create Loan Repayment Account
-                		LoanRepaymentAccount LRA = createLoanRepaymentAccount();
-                		// Ask user for loan to be repaid 
-                		try {
-                		System.out.println("Amount of loan you have: RM ");
-                		double OutStandingLoan = scanner.nextDouble();
-                		scanner.nextLine();
-                		System.out.printf("RM %.2f of loan left", OutStandingLoan);
-                		}
-                		catch(InputMismatchException e) {
-                    		System.out.println("Error: please input a number.");
-                    		scanner.nextLine();
-                    	}
-                    	catch(IllegalArgumentException e) {
-                    		System.out.println(e.getMessage());}
+                		LoanRepaymentAccount lra = createLoanRepaymentAccount(scanner);
                 		// Make account and give to user
-                		if (LRA != null)
-                			user.addAccount(LRA);
+                		if (lra != null)
+                			user.addAccount(lra);
                 		break; 
                 	case 3: 
                 		// Perform Transaction
@@ -146,7 +133,7 @@ public class Bank {
                 		
                 		// Valid Account
                 		if (account !=null) {
-                			account.getAccountInfo();
+                			//account.printAccountInfo();
                 			// Perform Deposit or Withdrawal
                 		}
                 		
@@ -210,10 +197,26 @@ public class Bank {
     		
     }
     
-    private LoanRepaymentAccount createLoanRepaymentAccount() {
+    private LoanRepaymentAccount createLoanRepaymentAccount(Scanner scanner) {
+    	// Ask user for loan to be repaid 
+		try {
+    		System.out.print("Enter amount of loan you have (RM):  ");
+    		double OutstandingLoan = scanner.nextDouble();
+    		scanner.nextLine();
+    		System.out.printf("RM %.2f of loan left\n", OutstandingLoan);
+		}
+		catch(InputMismatchException e) {
+    		System.out.println("Error: please input a number.");
+    		scanner.nextLine();
+    		return null;
+    	}
+    	catch(IllegalArgumentException e) {
+    		System.out.println(e.getMessage());
+    		return null;
+    	}
     	double repaidloan = 0;
-    	LoanRepaymentAccount LRA = new LoanRepaymentAccount(repaidloan);
+    	LoanRepaymentAccount lra = new LoanRepaymentAccount(repaidloan);
     	System.out.printf("Loan Repayment Account created. Loan paid: RM %.2f%n", repaidloan);
-    	return LRA;
+    	return lra;
     }
 }
