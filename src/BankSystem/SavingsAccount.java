@@ -24,7 +24,6 @@ public class SavingsAccount extends BankAccount{
 		return ( getBalance() - amount ) >= minBalance;
 	}
 
-
 	//withdraw from savings
 	@Override
 	 boolean withdraw(double amount, String note, LocalDate timestamp) {
@@ -50,9 +49,9 @@ public class SavingsAccount extends BankAccount{
 	@Override
 	void printAccountInfo() {
 		System.out.printf("Account Number: %s\n", getAccountNumber());
-		System.out.printf("Account Type: %s\n", getAccountType());
+		System.out.printf("Account Type  : %s\n", getAccountType());
 		System.out.printf("Balance       : RM %.2f\n", getBalance());
-		System.out.printf("Transactions: \n");
+		System.out.printf("Transactions  : \n");
 		for (Transaction t : getTransactions()) {
 			System.out.printf("%s\n", t.toString());
 		}
