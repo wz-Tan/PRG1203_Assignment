@@ -13,6 +13,24 @@ public class LoanRepaymentAccount extends BankAccount{
 	}
 
 	@Override
+	boolean allowsWithdrawal(){
+		return false;
+	}
+
+	// A deposit into a loan account is a repayment, so it reduces the outstanding balance
+	@Override
+	boolean deposit(double amount, String note, LocalDate timestamp){
+		// Reject non-positive amounts
+		if (amount <= 0){
+			System.out.println("Repayment amount must be greater than zero.");
+			return false;
+		}
+
+		applyRepayment(amount, note, timestamp);
+		return true;
+	}
+
+	@Override
 	boolean withdraw(double amount, LocalDate timestamp){
 		throw new UnsupportedOperationException("Cannot withdraw from Loan Repayment Account");
 	}
