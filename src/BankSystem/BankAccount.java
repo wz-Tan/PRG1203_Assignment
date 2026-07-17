@@ -8,18 +8,19 @@ import BankSystem.Transaction.TransactionType;
 
 // Abstract Parent Class of SavingsAccount and LoanRepaymentAccount
 public abstract class BankAccount{
-	protected enum AccountType { Savings, LoanRepayment };
-	protected String accountNumber;
-	protected double balance;
-	protected static final double INTEREST_RATE = 0.01;
-	protected ArrayList<Transaction> transactions;
-	protected AccountType type;
+	public enum AccountType { Savings, LoanRepayment };
+	private final String accountNumber;
+	private double balance;
+	private static final double INTEREST_RATE = 0.01;
+	private final ArrayList<Transaction> transactions;
+	private final AccountType type;
 
-	// Constructor
-	public BankAccount(){
+	// Constructor. Subclasses supply the starting balance and their account type.
+	protected BankAccount(double initialBalance, AccountType type){
 		this.accountNumber = UUID.randomUUID().toString();
-		this.balance = 0.0;
+		this.balance = initialBalance;
 		this.transactions = new ArrayList<Transaction>();
+		this.type = type;
 	}
 
 	// Account number getter
@@ -32,12 +33,16 @@ public abstract class BankAccount{
 		return balance;
 	}
 
-	// Transactions getter 
+	AccountType getAccountType() {
+		return type;
+	}
+
+	// Transactions getter
 	ArrayList<Transaction> getTransactions(){
 		return new ArrayList<Transaction>(transactions);
 	}
 
-	// Deposit funds 
+	// Deposit funds
 	boolean deposit(double amount, String note, LocalDate timestamp){
 		// Reject non-positive amounts
 		if (amount <= 0){
@@ -63,10 +68,17 @@ public abstract class BankAccount{
 		return withdraw(amount, null, timestamp);
 	}
 
+	// Deduct funds and record the transaction. Subclasses call this once their
+	// own withdrawal rules have passed.
+	protected void applyWithdrawal(double amount, String note, LocalDate timestamp){
+		balance -= amount;
+		transactions.add(new Transaction(Transaction.TransactionType.Withdrawal, amount, note, timestamp));
+	}
+
 	// Calculate and Apply Monthly Interest to the Balance
 	void calculateInterest(LocalDate timestamp){
 		double interest;
-		
+
 		interest = balance * INTEREST_RATE;
 		balance += interest;
 		transactions.add(new Transaction(Transaction.TransactionType.Interest, interest, "Monthly Interest", timestamp));
