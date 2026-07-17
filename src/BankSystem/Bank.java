@@ -111,30 +111,16 @@ public class Bank {
 
                 	switch (userChoice) {
                 	case 1:
-                		// Create Savings Account
-                    	SavingsAccount sa = createSavingsAccount(scanner);
-                		// Add account to arrayList of users account
-                		if (sa != null)
-                			user.addAccount(sa);
+                		// Create SavingsAccount
+                		user.createSavingsAccount(scanner);
                 		break;
                 	case 2:
-                		// Create Loan Repayment Account
-                		LoanRepaymentAccount lra = createLoanRepaymentAccount(scanner);
-                		// Make account and give to user
-                		if (lra != null)
-                			user.addAccount(lra);
+                		// Create LoanRepaymentAccount
+                		user.createSavingsAccount(scanner);
                 		break;
                 	case 3:
                 		// Perform Transaction
-                		System.out.println("Please select an account to perform your transaction: ");
-
-                		// Select User Account
-                		BankAccount account = user.chooseAccount(scanner);
-
-                		// Valid Account
-                		if (account !=null) {
-                			performTransaction(scanner, account);	
-                		}
+                		performTransaction(scanner, user);
                 		break;
                 	case 4:
                 		// Advance One Month
@@ -166,51 +152,17 @@ public class Bank {
 	            }
             }
         }
-
-    private SavingsAccount createSavingsAccount(Scanner scanner) {
-    	System.out.println("To open a savings account, you need to have at least RM100. How much money would you like to put in?");
-    	try {
-    	    double initialDeposit = scanner.nextDouble();
-    	    scanner.nextLine();
-
-    	    // SavingsAccount validates the minimum itself and throws if too low
-    	    SavingsAccount sa = new SavingsAccount(initialDeposit);
-    	    System.out.println("Savings account created successfully");
-    	    return sa;
-    	}
-    	catch(InputMismatchException e) {
-    		System.out.println("Error: please input a number.");
-    		scanner.nextLine();
-    	}
-    	catch(IllegalArgumentException e) {
-    		System.out.println(e.getMessage());
-    	}
-    	return null;
-    }
-
-    private LoanRepaymentAccount createLoanRepaymentAccount(Scanner scanner) {
-    	// Ask user for the outstanding loan to be repaid
-    	double outstandingLoan;
-		try {
-    		System.out.print("Enter amount of loan you have (RM):  ");
-    		outstandingLoan = scanner.nextDouble();
-    		scanner.nextLine();
-		}
-		catch(InputMismatchException e) {
-    		System.out.println("Error: please input a number.");
-    		scanner.nextLine();
-    		return null;
-    	}
-    	catch(IllegalArgumentException e) {
-    		System.out.println(e.getMessage());
-    		return null;
-    	}
-    	LoanRepaymentAccount lra = new LoanRepaymentAccount(outstandingLoan);
-    	System.out.printf("Loan Repayment Account created. Outstanding loan: RM %.2f%n", outstandingLoan);
-    	return lra;
-    }
     
-    private void performTransaction(Scanner scanner, BankAccount account) {
+    // Helper method 
+    private void performTransaction(Scanner scanner, User user) {
+    	System.out.println("Please select an account to perform your transaction: ");
+		// Select User Account
+		BankAccount account = user.chooseAccount(scanner);
+		// Exit if no accounts are available
+		if (account == null) {
+			return;
+		}
+		
     	int userInput;
     	System.out.println("Please select an action: ");
     	System.out.println("1. Deposit");
@@ -230,6 +182,6 @@ public class Bank {
     	else {
     		// withdraw
     	}
- 	
+
     }
 }
