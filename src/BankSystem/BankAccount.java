@@ -68,8 +68,7 @@ public abstract class BankAccount{
 		return withdraw(amount, null, timestamp);
 	}
 
-	// Deduct funds and record the transaction. Subclasses call this once their
-	// own withdrawal rules have passed.
+	// Used by child class to change balance attribute
 	protected void applyWithdrawal(double amount, String note, LocalDate timestamp){
 		balance -= amount;
 		transactions.add(new Transaction(Transaction.TransactionType.Withdrawal, amount, note, timestamp));

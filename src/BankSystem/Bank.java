@@ -116,7 +116,7 @@ public class Bank {
                 		break;
                 	case 2:
                 		// Create LoanRepaymentAccount
-                		user.createSavingsAccount(scanner);
+                		user.createLoanRepaymentAccount(scanner);
                 		break;
                 	case 3:
                 		// Perform Transaction
@@ -152,8 +152,8 @@ public class Bank {
 	            }
             }
         }
-    
-    // Helper method 
+
+    // Helper method
     private void performTransaction(Scanner scanner, User user) {
     	System.out.println("Please select an account to perform your transaction: ");
 		// Select User Account
@@ -162,7 +162,7 @@ public class Bank {
 		if (account == null) {
 			return;
 		}
-		
+
     	int userInput;
     	System.out.println("Please select an action: ");
     	System.out.println("1. Deposit");

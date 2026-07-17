@@ -7,15 +7,12 @@ import java.util.UUID;
 import java.time.LocalDate;
 
 public class User {
-
     private String userId;
     private String username;
     private int passwordHash; // Compare hashed result
     private ArrayList<BankAccount> accounts = new ArrayList<>(); // ArrayList of User's Bank Accounts
-
     private LocalDate currentDate; // Current Date for User -> Used to log transactions and keep their timing separate
     private int monthsPassed;
-
 
     public User() {}
 
@@ -71,7 +68,7 @@ public class User {
     	chosenAccount.printAccountInfo();
     }
 
-    // Select an Account from All Accounts
+    // Select an account from all Accounts
     BankAccount chooseAccount(Scanner scanner) {
     	// Return back if no accounts available
     	if (accounts.size() == 0) {
@@ -132,7 +129,7 @@ public class User {
     		System.out.print("Enter amount of loan you have (RM):  ");
     		double outstandingLoan = scanner.nextDouble();
     		scanner.nextLine();
-    		
+
     		LoanRepaymentAccount lra = new LoanRepaymentAccount(outstandingLoan);
     		addAccount(lra);
         	System.out.printf("Loan Repayment Account created. Outstanding loan: RM %.2f%n", outstandingLoan);
