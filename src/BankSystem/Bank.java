@@ -2,6 +2,7 @@ package BankSystem;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
+import java.time.LocalDate;
 
 // This Serves as the Controller
 public class Bank {
@@ -164,24 +165,60 @@ public class Bank {
 		}
 
     	int userInput;
-    	System.out.println("Please select an action: ");
-    	System.out.println("1. Deposit");
-    	System.out.println("2. Withdrawal");
+    	double amount;
+    	String note;
+
+    	// Collect all user input
     	try {
+    		System.out.println("Please select an action: ");
+    		System.out.println("1. Deposit");
+    		System.out.println("2. Withdrawal");
     		userInput = scanner.nextInt();
     		scanner.nextLine();
+
+    		// User option (1 or 2)
+    		if (userInput != 1 && userInput != 2) {
+    			System.out.println("Error: Invalid choice, please try again.");
+    			return;
+    		}
+
+    		// Reject withdrawals from accounts that don't allow them before asking for more
+    		if (userInput == 2 && !account.allowsWithdrawal()) {
+    			System.out.println("Error: Cannot withdraw from Loan Repayment Account");
+    			return;
+    		}
+
+    		// Get amount
+    		System.out.print("Enter amount (RM): ");
+    		amount = scanner.nextDouble();
+    		scanner.nextLine();
+
+    		// Get note
+    		System.out.print("Enter a note (optional, press Enter to skip): ");
+    		note = scanner.nextLine().trim();
+    		if (note.isEmpty()) {
+    			note = null;
+    		}
     	}
     	catch(InputMismatchException e) {
     		System.out.println("Error: please input a number.");
+    		scanner.nextLine(); // Cleanup leftover input
     		return;
     	}
+
+    	// Timestamp for transactions
+    	LocalDate timestamp = user.getCurrentDate();
+
     	if (userInput == 1) {
-    		// Ask for deposit amount etc
-    		// account.deposit(amount, note, timestamp);
+    		// Deposit (deposit() validates the amount and reports its own errors)
+    		if (account.deposit(amount, note, timestamp)) {
+    			System.out.printf("Deposit of RM %.2f successful. New balance: RM %.2f%n", amount, account.getBalance());
+    		}
     	}
     	else {
-    		// withdraw
+    		if (account.withdraw(amount, note, timestamp)) {
+    				System.out.printf("Withdrawal of RM %.2f successful. New balance: RM %.2f%n", amount, account.getBalance());
+    			}
     	}
-
     }
 }
