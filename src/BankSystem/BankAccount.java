@@ -68,10 +68,22 @@ public abstract class BankAccount{
 		return withdraw(amount, null, timestamp);
 	}
 
+	// If account allows withdrawal
+	boolean allowsWithdrawal(){
+		return true; // Original is true
+	}
+
 	// Used by child class to change balance attribute
 	protected void applyWithdrawal(double amount, String note, LocalDate timestamp){
 		balance -= amount;
 		transactions.add(new Transaction(Transaction.TransactionType.Withdrawal, amount, note, timestamp));
+	}
+
+	// Reduce the balance while recording the entry as a deposit.
+	// Used where a deposit pays something down (e.g. repaying a loan).
+	protected void applyRepayment(double amount, String note, LocalDate timestamp){
+		balance -= amount;
+		transactions.add(new Transaction(Transaction.TransactionType.Deposit, amount, note, timestamp));
 	}
 
 	// Calculate and Apply Monthly Interest to the Balance
