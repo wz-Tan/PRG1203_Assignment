@@ -96,10 +96,12 @@ public class User {
 
     	catch(IllegalArgumentException e) {
     		System.out.println(e.getMessage());
+    	    scanner.nextLine();
     	}
 
     	catch(Exception e) {
     		System.out.println("Account does not exist.");
+    	    scanner.nextLine();
     	}
 
     	return null;
@@ -118,9 +120,11 @@ public class User {
     	}
     	catch(InputMismatchException e) {
     		System.out.println("Error: please input a number.");
+    	    scanner.nextLine();
     	}
     	catch(IllegalArgumentException e) {
     		System.out.println(e.getMessage());
+    	    scanner.nextLine();
     	}
     }
 
@@ -140,9 +144,11 @@ public class User {
     	}
     	catch(IllegalArgumentException e) {
     		System.out.println(e.getMessage());
+    	    scanner.nextLine();
     	}
     }
 
+    @override
     public String toString(){
         return String.format("Username: %s , Password Hash: %s", username, passwordHash);
     }

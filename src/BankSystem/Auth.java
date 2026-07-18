@@ -44,6 +44,7 @@ public class Auth {
              }
              catch (Exception e) {
             	 System.out.println("Invalid input. Please try again");
+            	 scanner.nextLine();
             	 return null; 
              }
              
@@ -77,6 +78,7 @@ public class Auth {
              
              catch (Exception e) {
             	 System.out.println("Invalid input. Please try again");
+            	 scanner.nextLine();
             	 return null; 
              }
         }
