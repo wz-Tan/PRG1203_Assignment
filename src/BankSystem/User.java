@@ -69,7 +69,7 @@ public class User {
     }
 
     // Select an account from all Accounts
-    BankAccount chooseAccount(Scanner scanner) {
+    public  BankAccount chooseAccount(Scanner scanner) {
     	// Return back if no accounts available
     	if (accounts.size() == 0) {
     		System.out.println("No accounts available.");
@@ -148,7 +148,7 @@ public class User {
     	}
     }
 
-    @override
+    @Override
     public String toString(){
         return String.format("Username: %s , Password Hash: %s", username, passwordHash);
     }
