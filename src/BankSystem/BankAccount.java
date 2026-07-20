@@ -9,14 +9,16 @@ import BankSystem.Transaction.TransactionType;
 // Abstract Parent Class of SavingsAccount and LoanRepaymentAccount
 public abstract class BankAccount{
 	public enum AccountType { Savings, LoanRepayment };
-	private final String accountNumber;
+	private String accountNumber;
 	private double balance;
-	private static final double INTEREST_RATE = 0.01;
-	private final ArrayList<Transaction> transactions;
-	private final AccountType type;
+	private final double INTEREST_RATE = 0.01;
+	private ArrayList<Transaction> transactions;
+	private AccountType type;
+	
+	public BankAccount() {};
 
 	// Constructor. Subclasses supply the starting balance and their account type.
-	protected BankAccount(double initialBalance, AccountType type){
+	public BankAccount(double initialBalance, AccountType type){
 		this.accountNumber = UUID.randomUUID().toString();
 		this.balance = initialBalance;
 		this.transactions = new ArrayList<Transaction>();
@@ -74,14 +76,14 @@ public abstract class BankAccount{
 	}
 
 	// Used by child class to change balance attribute
-	protected void applyWithdrawal(double amount, String note, LocalDate timestamp){
+	void applyWithdrawal(double amount, String note, LocalDate timestamp){
 		balance -= amount;
 		transactions.add(new Transaction(Transaction.TransactionType.Withdrawal, amount, note, timestamp));
 	}
 
 	// Reduce the balance while recording the entry as a deposit.
 	// Used where a deposit pays something down (e.g. repaying a loan).
-	protected void applyRepayment(double amount, String note, LocalDate timestamp){
+	void applyRepayment(double amount, String note, LocalDate timestamp){
 		balance -= amount;
 		transactions.add(new Transaction(Transaction.TransactionType.Deposit, amount, note, timestamp));
 	}

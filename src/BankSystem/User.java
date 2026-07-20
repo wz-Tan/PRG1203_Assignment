@@ -69,7 +69,7 @@ public class User {
     }
 
     // Select an account from all Accounts
-    public  BankAccount chooseAccount(Scanner scanner) {
+    BankAccount chooseAccount(Scanner scanner) {
     	// Return back if no accounts available
     	if (accounts.size() == 0) {
     		System.out.println("No accounts available.");
@@ -107,7 +107,7 @@ public class User {
     	return null;
     }
 
-    public void createSavingsAccount(Scanner scanner) {
+    void createSavingsAccount(Scanner scanner) {
     	try {
         	System.out.println("To open a savings account, you need to have at least RM100. How much money would you like to put in?");
     	    double initialDeposit = scanner.nextDouble();
@@ -128,7 +128,7 @@ public class User {
     	}
     }
 
-    public void createLoanRepaymentAccount(Scanner scanner) {
+    void createLoanRepaymentAccount(Scanner scanner) {
 		try {
     		System.out.print("Enter amount of loan you have (RM):  ");
     		double outstandingLoan = scanner.nextDouble();
@@ -150,6 +150,6 @@ public class User {
 
     @Override
     public String toString(){
-        return String.format("Username: %s , Password Hash: %s", username, passwordHash);
-    }
+		return String.format("Username: %s , Password Hash: %s", username, passwordHash);
+	}
 }

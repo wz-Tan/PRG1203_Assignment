@@ -8,8 +8,8 @@ public class LoanRepaymentAccount extends BankAccount{
 		this(0.0);
 	}
 
-	public LoanRepaymentAccount(double repaidloan) {
-		super(repaidloan, AccountType.LoanRepayment);
+	public LoanRepaymentAccount(double repaidLoan) {
+		super(repaidLoan, AccountType.LoanRepayment);
 	}
 
 	@Override
