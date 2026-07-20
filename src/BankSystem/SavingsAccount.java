@@ -8,12 +8,10 @@ import java.time.LocalDate;
 public class SavingsAccount extends BankAccount{
 
 	//declare min balance as rm100 using final and double due to decimal places in money
-	private static final double minBalance = 100.00;
+	private final double minBalance = 100.00;
 
 	//constructors
-	public SavingsAccount () {
-		this(0.0);
-	}
+	public SavingsAccount () {}
 
 	public SavingsAccount(double initialAmount) {
 		super(initialAmount, AccountType.Savings);
