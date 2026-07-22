@@ -21,8 +21,6 @@ public class Bank {
 
         while (rootLevelChoice != 3){
 
-            System.out.println("Users are " + authClient.getAllUsers());
-
             System.out.println("\nPlease Choose An Action: \n 1 - Sign In \n 2 - Create New User \n 3 - Exit");
 
             try {
