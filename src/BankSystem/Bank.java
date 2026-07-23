@@ -211,12 +211,12 @@ public class Bank {
     	if (userInput == 1) {
     		// Deposit (deposit() validates the amount and reports its own errors)
     		if (account.deposit(amount, note, timestamp)) {
-    			System.out.printf("Deposit of RM %.2f successful. New balance: RM %.2f%n", amount, account.getBalance());
+    			System.out.printf("Deposit successful. New balance: RM %.2f%n", amount, account.getBalance());
     		}
     	}
     	else {
     		if (account.withdraw(amount, note, timestamp)) {
-    				System.out.printf("Withdrawal of RM %.2f successful. New balance: RM %.2f%n", amount, account.getBalance());
+    				System.out.printf("Withdrawal successful. New balance: RM %.2f%n", amount, account.getBalance());
     			}
     	}
     }
