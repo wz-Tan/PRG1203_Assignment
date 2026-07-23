@@ -7,18 +7,22 @@ import java.util.UUID;
 import BankSystem.Transaction.TransactionType;
 
 // Abstract Parent Class of SavingsAccount and LoanRepaymentAccount
-public abstract class BankAccount{
-	public enum AccountType { Savings, LoanRepayment };
+public abstract class BankAccount {
+	public enum AccountType {
+		Savings, LoanRepayment
+	};
+
 	private String accountNumber;
 	private double balance;
 	private final double INTEREST_RATE = 0.01;
 	private ArrayList<Transaction> transactions;
 	private AccountType type;
-	
-	public BankAccount() {};
+
+	public BankAccount() {
+	};
 
 	// Constructor. Subclasses supply the starting balance and their account type.
-	public BankAccount(double initialBalance, AccountType type){
+	public BankAccount(double initialBalance, AccountType type) {
 		this.accountNumber = UUID.randomUUID().toString();
 		this.balance = initialBalance;
 		this.transactions = new ArrayList<Transaction>();
@@ -26,12 +30,12 @@ public abstract class BankAccount{
 	}
 
 	// Account number getter
-	String getAccountNumber(){
+	String getAccountNumber() {
 		return accountNumber;
 	}
 
 	// Balance getter
-	double getBalance(){
+	double getBalance() {
 		return balance;
 	}
 
@@ -40,14 +44,14 @@ public abstract class BankAccount{
 	}
 
 	// Transactions getter
-	ArrayList<Transaction> getTransactions(){
+	ArrayList<Transaction> getTransactions() {
 		return new ArrayList<Transaction>(transactions);
 	}
 
 	// Deposit funds
-	boolean deposit(double amount, String note, LocalDate timestamp){
+	boolean deposit(double amount, String note, LocalDate timestamp) {
 		// Reject non-positive amounts
-		if (amount <= 0){
+		if (amount <= 0) {
 			System.out.println("Deposit amount must be greater than zero.");
 			return false;
 		}
@@ -58,44 +62,51 @@ public abstract class BankAccount{
 	}
 
 	// Deposit without a note
-	boolean deposit(double amount,  LocalDate timestamp){
+	boolean deposit(double amount, LocalDate timestamp) {
 		return deposit(amount, null, timestamp);
 	}
 
 	// Withdraw funds (abstract)
-	abstract boolean withdraw(double amount, String note,  LocalDate timestamp);
+	abstract boolean withdraw(double amount, String note, LocalDate timestamp);
 
 	// Withdraw without a note (abstract)
-	boolean withdraw(double amount,  LocalDate timestamp){
+	boolean withdraw(double amount, LocalDate timestamp) {
 		return withdraw(amount, null, timestamp);
 	}
 
 	// If account allows withdrawal
-	boolean allowsWithdrawal(){
+	boolean allowsWithdrawal() {
 		return true; // Original is true
 	}
 
 	// Used by child class to change balance attribute
-	void applyWithdrawal(double amount, String note, LocalDate timestamp){
+	void applyWithdrawal(double amount, String note, LocalDate timestamp) {
 		balance -= amount;
 		transactions.add(new Transaction(Transaction.TransactionType.Withdrawal, amount, note, timestamp));
 	}
 
 	// Reduce the balance while recording the entry as a deposit.
 	// Used where a deposit pays something down (e.g. repaying a loan).
-	void applyRepayment(double amount, String note, LocalDate timestamp){
+	void applyRepayment(double amount, String note, LocalDate timestamp) {
+		if (amount > balance) {
+			System.out.printf("\nReturned excess payment of RM%.2f.\n", amount - balance);
+			amount = balance;
+		}
+
 		balance -= amount;
 		transactions.add(new Transaction(Transaction.TransactionType.Deposit, amount, note, timestamp));
 	}
 
 	// Calculate and Apply Monthly Interest to the Balance
-	void calculateInterest(LocalDate timestamp){
+	void calculateInterest(LocalDate timestamp) {
 		double interest;
 
 		interest = balance * INTEREST_RATE;
 		balance += interest;
-		transactions.add(new Transaction(Transaction.TransactionType.Interest, interest, "Monthly Interest", timestamp));
-		System.out.printf("Interest of %.2f applied to account %s. New balance: %.2f%n", interest, accountNumber, balance);
+		transactions
+				.add(new Transaction(Transaction.TransactionType.Interest, interest, "Monthly Interest", timestamp));
+		System.out.printf("Interest of %.2f applied to account %s. New balance: %.2f%n", interest, accountNumber,
+				balance);
 	}
 
 	abstract void printAccountInfo();

@@ -20,6 +20,13 @@ public class LoanRepaymentAccount extends BankAccount{
 	// A deposit into a loan account is a repayment, so it reduces the outstanding balance
 	@Override
 	boolean deposit(double amount, String note, LocalDate timestamp){
+		
+		// No Loan Anymore
+		if (getBalance() == 0 ) {
+			System.out.println("There is no loan left to repay.");
+			return false; 
+		}
+		
 		// Reject non-positive amounts
 		if (amount <= 0){
 			System.out.println("Repayment amount must be greater than zero.");
